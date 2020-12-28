@@ -35,18 +35,22 @@
 
 <br/>
 
-## 💻 프로그램 실행 결과
+## 💻 프로그램 실행 결과 - 노선도
 
 ### 역관리
+
 <img width="100%" src="./images/station_manager.gif">
 
 ### 노선관리
+
 <img width="100%" src="./images/line_manager.gif">
 
 ### 구간관리
+
 <img width="100%" src="./images/section_manager.gif">
 
 ### 노선도 출력
+
 <img width="100%" src="./images/map_print_manager.gif">
 
 ## 🚀 기능 요구사항 - 경로 조회
@@ -66,6 +70,7 @@
 ```
 
 ### 경로 조회 기능
+
 <img src="./images/path_result.jpg" width="100%">
 
 - 출발역과 도착역을 입력받아 경로를 조회한다.
@@ -81,8 +86,10 @@
 
 <br>
 
-## 💻 프로그래밍 실행 결과
+## 💻 프로그래밍 실행 결과 - 경로 조회
+
 ### 경로 조회
+
 <img src="./images/path_result.gif" width="100%">
 
 
@@ -127,7 +134,9 @@
 - 📝 결과는 `table`을 이용하여 보여준다.
 
 ## ❗️힌트
+
 ## 데이터 초기화
+
 자바스크립트에서 데이터를 초기화하는 방법 중에 하나는 아래와 같이 data를 `export`하고, `import`하는 것이다.
 
 ```javascript
@@ -170,6 +179,7 @@ function App() {
 ```
 
 ## 최단 경로 라이브러리
+
 - `utils/Dijkstra.js` 라이브러리를 활용하면 간편하게 최단거리를 조회할 수 있다.
 - 정점(Vertex)과 간선(Edge), 그리고 가중치 개념을 이용
   - 정점: 지하철역
@@ -192,6 +202,7 @@ const result = dijkstra.findShortestPath("V1", "V3");
 ```
 
 #### 테스트설명
+
 <img src="./images/dijkstra_example.png" width="400">
 
 - 역 사이의 거리를 고려하지 않는 경우 V1->V3 경로가 최단 경로
@@ -217,6 +228,7 @@ const result = dijkstra.findShortestPath("V1", "V3");
   - [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals)
 
 ### 추가된 요구사항
+
 - [data](https://developer.mozilla.org/ko/docs/Learn/HTML/Howto/%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%86%8D%EC%84%B1_%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)속성을 활용하여 html 태그에 역, 노선, 구간의 유일한 데이터 값들을 관리한다. 
 - [localStorage](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)를 이용하여, 새로고침하더라도 가장 최근에 작업한 정보들을 불러올 수 있도록 한다.
 
