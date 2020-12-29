@@ -3,10 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <title>지하철 노선도 관리 & 경로 검색</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div id="app">
       <h1>🚇 지하철 노선도 관리 & 경로 검색</h1>
+      <div class="buttons">
+        <button id = "station-manager-button">1. 역 관리</button>
+        <button id = "line-manager-button">2. 노선 관리</button>
+        <button id = "section-manager-button">3. 구간 관리</button>
+        <button id = "map-print-manager-button">4. 지하철 노선도 출력</button>
+      </div>
+
+      <div id = "station-manager">
+        <h4>역 이름</h4>
+        <input id = "station-name-input" type="text" placeholder="역 이름을 입력하세요" required>
+        <button id = "station-add-button">역 추가</button>
+        <h2>🚉 지하철 역 목록</h2>
+        <table>
+          <tr>
+            <th>역 이름</th>
+            <th>설정</th>
+          </tr>
+          <tr>
+            <td>강남</td>
+            <td><button>삭제</button></td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="line-manager">
+
+      </div>
+      <div id="section-manager">
+
+      </div>
+      <div id="map-print-manager">
+
+      </div>
     </div>
     <script type="module" src="src/index.js"></script>
   </body>
