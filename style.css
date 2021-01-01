@@ -2,10 +2,18 @@ button {
   font-weight: 600;
 }
 
+table {
+  text-align: center;
+}
+
 .hidden {
   display: none;
 }
 
 .show {
   display: block;
+}
+
+#line-name-input {
+  margin-bottom: 20px;
 }

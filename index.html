@@ -15,10 +15,12 @@
         <button id = "map-print-manager-button">4. 지하철 노선도 출력</button>
       </div>
 
+
       <div id = "station-manager" class = "show">
         <h4>역 이름</h4>
         <input id = "station-name-input" type="text" placeholder="역 이름을 입력하세요" required>
         <button id = "station-add-button">역 추가</button>
+        
         <h2>🚉 지하철 역 목록</h2>
         <div id="station-name-table">
           <table border="1">
@@ -27,20 +29,111 @@
               <th>설정</th>
             </tr>
             <tr>
+              <td>교대</td>
+              <td><button>삭제</button></td>
+            </tr>
+            <tr>
               <td>강남</td>
+              <td><button>삭제</button></td>
+            </tr>
+            <tr>
+              <td>역삼</td>
+              <td><button>삭제</button></td>
+            </tr>
+            <tr>
+              <td>남부터미널</td>
+              <td><button>삭제</button></td>
+            </tr>
+            <tr>
+              <td>양재</td>
+              <td><button>삭제</button></td>
+            </tr>
+            <tr>
+              <td>매봉</td>
+              <td><button>삭제</button></td>
+            </tr>
+            <tr>
+              <td>양재 시민의 숲</td>
               <td><button>삭제</button></td>
             </tr>
           </table>
         </div>
       </div>
 
-      <div id="line-manager">
+
+      <div id="line-manager" class = "show">
+        <h4>노선 이름</h4>
+
+        <input id = "line-name-input" type="text" placeholder="노선 이름을 입력하세요" required>
+        
+        <div>
+          상행종점 <select id="line-start-station-selector">
+            <option value="인천">인천</option>
+          </select>
+        </div>
+
+        <div>
+          하행종점 <select id="line-end-station-selector">
+            <option value="인천">인천</option>          
+          </select>
+        </div>
+
+        <div style = "margin: 10px 0px">
+          구간거리 <input type="text" id = "line-distance" placeholder="구간 거리(km)를 입력하세요">
+          소요시간 <input type="text" id="line-time" placeholder="소요시간(분)을 입력하세요">
+        </div>
+
+        <button id = "line-add-button" style="margin: 10px">노선 추가</button>
+
+        <h2>🚉 지하철 노선 목록</h2>
+        <div id="line-status-table">
+          <table border="1">
+            <tr>
+              <th>노선 이름</th>
+              <th>상행 종점역</th>
+              <th>하행 종점역</th>
+              <th>설정</th>
+            </tr>
+            <tr>
+              <td>2호선</td>
+              <td>교대</td>
+              <td>역삼</td>
+              <td><button class = "line-delete-button">삭제</button></td>
+            </tr>
+            <tr>
+              <td>3호선</td>
+              <td>교대</td>
+              <td>매봉</td>
+              <td><button class = "line-delete-button">삭제</button></td>
+            </tr>
+            <tr>
+              <td>신분당선</td>
+              <td>강남</td>
+              <td>양재 시민의 숲</td>
+              <td><button class = "line-delete-button">삭제</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <div id="section-manager" class = "show">
+        <h3>구간을 수정할 노선을 선택해주세요.</h3>
+        <button class="section-line-menu-button">2호선</button>
+        <button class="section-line-menu-button">3호선</button>
+        <button class="section-line-menu-button">신분당선</button>
+
+        <div class="hidden"><h3>2호선 관리</h3></div>
+        <div class="hidden"><h3>3호선 관리</h3></div>
+        <div class="hidden"><h3>신분당선 관리</h3></div>
+
+        <h4>구간 등록</h4>
+
 
       </div>
-      <div id="section-manager">
 
-      </div>
-      <div id="map-print-manager">
+
+      <div id="map-print-manager" class = "show">
 
       </div>
     </div>
