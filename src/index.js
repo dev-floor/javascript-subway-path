@@ -1,5 +1,6 @@
+import controlAllBtns from "../controlTower/eventHandler.js";
 import {keyInput, makeAllHidden} from "../view/managerContainer.js"
-import {} from "./initState.js"
+import {setInitialState} from "./initState.js"
 
 export default class SubwayLineControl {
     constructor() {
@@ -8,9 +9,12 @@ export default class SubwayLineControl {
 
     init() {
         // initialize states.
-        // only 4 buttons have to be shown.
+        setInitialState();
 
+        // only 4 buttons have to be shown.
         makeAllHidden();
+
+        // wait for click event on 4 buttons.
         this.waitForKeyInput();
     }
 
@@ -20,3 +24,4 @@ export default class SubwayLineControl {
 }
 
 new SubwayLineControl();
+new controlAllBtns();
