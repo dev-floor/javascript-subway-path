@@ -2,12 +2,27 @@ import {message} from "../message.js"
 
 const addStation = () => {
     const userInputStation = document.querySelector("#station-name-input").value;
-    
-    userInputStationValidation(userInputStation);
+
+    if(userInputStationValidation(userInputStation)) {
+        addStationToList(userInputStation);
+    }
 }
 
-const deleteStation = () => {
-    alert("delete btn pressed");
+const deleteStation = (event) => {
+    if(event.target.matches("button")) {
+        alert("delete btn pressed");
+    }
+}
+
+const addStationToList = (inputStation) => {
+    // localStorage.setItem("station", inputStation);
+    
+    const stationList = document.querySelector("#station-name-table tbody");
+    stationList.innerHTML += `<tr>
+    <td>${inputStation}</td>
+    <td><button class = "station-delete-button">삭제</button></td>
+  </tr>`;
+    
 }
 
 const userInputStationValidation = (name) => {
@@ -16,7 +31,9 @@ const userInputStationValidation = (name) => {
         return;
     }
 
-    // 중복검사
+
+    return true;
+    
 }
 
 export {addStation, deleteStation};

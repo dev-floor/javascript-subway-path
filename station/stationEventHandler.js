@@ -15,7 +15,7 @@ export default class stationEventHandler {
     }
 
     setStationDeleteBtnListener() {
-        const stationDeleteBtns = document.querySelectorAll("#station-name-table  button");
+        const stationDeleteBtns = document.querySelectorAll("#station-name-table");
         stationDeleteBtns.forEach(btn => btn.addEventListener("click", deleteStation))
     }
 }
