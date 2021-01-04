@@ -1,21 +1,43 @@
 import {message} from "../message.js"
+import {constants} from "../constants.js"
 
 const addStation = () => {
     const userInputStation = document.querySelector("#station-name-input").value;
 
-    if(userInputStationValidation(userInputStation)) {
-        addStationToList(userInputStation);
-    }
+    userInputStationValidation(userInputStation) ? addStationToList(userInputStation) : 0;
 }
 
 const deleteStation = (event) => {
-    if(event.target.matches("button")) {
-        alert("delete btn pressed");
+    if(event.target.matches(".station-delete-button") && confirm(message.DELETE_STATION_BTN_PRESSED)) {
+        const removeTarget = event.target.closest(constants.TABLE_TARGET);
+
+        // delete from localStorage.
+        const removeStationName = removeTarget.childNodes[constants.STATION_VALUE_CHILDNODE_INDEX].innerHTML;
+        const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
+
+        const localStorageArray = JSON.parse(localStorageData);
+        const removedAfter = localStorageArray.filter(x => x !== removeStationName);
+        localStorage.setItem(constants.LOCAL_STORAGE_KEY_STATION, JSON.stringify(removedAfter));
+        
+
+        // remove from table.
+        removeTarget.remove();
     }
 }
 
 const addStationToList = (inputStation) => {
-    // localStorage.setItem("station", inputStation);
+    // add to localStorage.
+    const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
+    
+    if(localStorageData) {
+        const localStorageDataToArray = JSON.parse(localStorageData);
+        localStorageDataToArray.push(inputStation);
+        localStorage.setItem(constants.LOCAL_STORAGE_KEY_STATION, JSON.stringify(localStorageDataToArray));
+    } else {
+        const localStorageArray = [];
+        localStorageArray.push(inputStation);
+        localStorage.setItem(constants.LOCAL_STORAGE_KEY_STATION, JSON.stringify(localStorageArray));
+    }
     
     const stationList = document.querySelector("#station-name-table tbody");
     stationList.innerHTML += `<tr>
@@ -25,15 +47,39 @@ const addStationToList = (inputStation) => {
     
 }
 
+const loadLocalStorageData = () => {
+    const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
+
+    if(localStorageData) {
+        const localStorageDataToArray = JSON.parse(localStorageData)
+        
+        const stationList = document.querySelector("#station-name-table tbody");
+
+        localStorageDataToArray.forEach(station => {
+            stationList.innerHTML += `<tr>
+            <td>${station}</td>
+            <td><button class = "station-delete-button">삭제</button></td>
+        </tr>`;
+        })
+    }
+}
+
 const userInputStationValidation = (name) => {
     if(name.length < 2) {
         alert(message.INPUT_STATION_NAME_LESS_THAN_TWO);
-        return;
+        return false;
     }
 
-
+    const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
+    if(localStorageData) {
+        const localStorageDataToArray = JSON.parse(localStorageData)
+        
+        if(localStorageDataToArray.includes(name)) {
+            alert(message.INPUT_STATION_NAME_OVERLAPPED);
+            return false;
+        }
+    }
     return true;
-    
 }
 
-export {addStation, deleteStation};
+export {addStation, deleteStation, loadLocalStorageData};
