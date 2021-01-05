@@ -15,7 +15,7 @@ const userInputStationValidation = (name) => {
 
     const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
     if(localStorageData) {
-        const localStorageDataToArray = JSON.parse(localStorageData)
+        const localStorageDataToArray = JSON.parse(localStorageData);
         
         if(localStorageDataToArray.includes(name)) {
             alert(message.INPUT_STATION_NAME_OVERLAPPED);
@@ -39,10 +39,7 @@ const addStationToList = (inputStation) => {
     }
     
     const stationList = document.querySelector("#station-name-table tbody");
-    stationList.innerHTML += `<tr>
-    <td>${inputStation}</td>
-    <td><button class = "station-delete-button">삭제</button></td>
-  </tr>`;   
+    stationList.innerHTML += `<tr>    <td>${inputStation}</td>    <td><button class = "station-delete-button">삭제</button></td>  </tr>`;   
 }
 
 const deleteStation = (event) => {
@@ -69,13 +66,11 @@ const loadLocalStorageData = () => {
         const localStorageDataToArray = JSON.parse(localStorageData);
         
         const stationList = document.querySelector("#station-name-table tbody");
+        stationList.innerHTML = `<tr><th>역 이름</th><th>설정</th></tr>`;
         localStorageDataToArray.forEach(station => {
-            stationList.innerHTML += `<tr>
-            <td>${station}</td>
-            <td><button class = "station-delete-button">삭제</button></td>
-        </tr>`;
+            stationList.innerHTML += `<tr><td>${station}</td><td><button class = "station-delete-button">삭제</button></td></tr>`;
         })
     }
 }
 
-export {addStation, deleteStation, loadLocalStorageData};
+export {addStation, deleteStation, loadLocalStorageData, addStationToList};
