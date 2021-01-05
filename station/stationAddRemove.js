@@ -39,7 +39,7 @@ const addStation = (inputStation) => {
     }
     
     const stationList = document.querySelector("#station-name-table tbody");
-    stationList.innerHTML += `<tr>    <td>${inputStation}</td>    <td><button class = "station-delete-button">삭제</button></td>  </tr>`;   
+    stationList.innerHTML += `<tr><td>${inputStation}</td><td><button class = "station-delete-button">삭제</button></td></tr>`;   
 }
 
 const deleteStation = (event) => {
