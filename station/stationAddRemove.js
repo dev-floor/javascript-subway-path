@@ -1,10 +1,10 @@
 import {message} from "../message.js"
 import {constants} from "../constants.js"
 
-const addStation = () => {
+const addStationPreliminaryWork = () => {
     const userInputStation = document.querySelector("#station-name-input").value;
 
-    userInputStationValidation(userInputStation) ? addStationToList(userInputStation) : 0;
+    userInputStationValidation(userInputStation) ? addStation(userInputStation) : 0;
 }
 
 const userInputStationValidation = (name) => {
@@ -25,7 +25,7 @@ const userInputStationValidation = (name) => {
     return true;
 }
 
-const addStationToList = (inputStation) => {
+const addStation = (inputStation) => {
     const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
     
     if(localStorageData) {
@@ -73,4 +73,4 @@ const loadLocalStorageData = () => {
     }
 }
 
-export {addStation, deleteStation, loadLocalStorageData, addStationToList};
+export {addStationPreliminaryWork, deleteStation, loadLocalStorageData, addStation};

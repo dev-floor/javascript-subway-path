@@ -1,7 +1,7 @@
 // Here, we handle all the events happening when
 // 1. 역 관리 button is clicked.
 
-import {addStation, deleteStation, loadLocalStorageData} from "./stationAddRemove.js"
+import {addStationPreliminaryWork, deleteStation, loadLocalStorageData} from "./stationAddRemove.js"
 
 export default class stationEventHandler {
     constructor() {
@@ -12,7 +12,7 @@ export default class stationEventHandler {
 
     setStationAddBtnListener() {
         const stationAddBtn = document.getElementById("station-add-button");
-        stationAddBtn.addEventListener("click", addStation);
+        stationAddBtn.addEventListener("click", addStationPreliminaryWork);
     }
 
     setStationDeleteBtnListener() {

@@ -1,4 +1,4 @@
-import {addStationToList} from "../station/stationAddRemove.js"
+import {addStation} from "../station/stationAddRemove.js"
 import {constants} from "../constants.js"
 
 const userInputStationValidationWithoutAlert = (name) => {
@@ -18,31 +18,31 @@ const setInitialState = () => {
 
     // 7 stations adding.
     if(userInputStationValidationWithoutAlert("교대")) {
-        addStationToList("교대");
+        addStation("교대");
     }
 
     if(userInputStationValidationWithoutAlert("똑집")) {
-        addStationToList("똑집");
+        addStation("똑집");
     }
 
     if(userInputStationValidationWithoutAlert("역삼")) {
-        addStationToList("역삼");
+        addStation("역삼");
     }
 
     if(userInputStationValidationWithoutAlert("남부터미널")) {
-        addStationToList("남부터미널");
+        addStation("남부터미널");
     }
 
     if(userInputStationValidationWithoutAlert("양재")) {
-        addStationToList("양재");
+        addStation("양재");
     }
 
     if(userInputStationValidationWithoutAlert("매봉")) {
-        addStationToList("매봉");
+        addStation("매봉");
     }
 
     if(userInputStationValidationWithoutAlert("양재시민의숲")) {
-        addStationToList("양재시민의숲");
+        addStation("양재시민의숲");
     }
 }
 
