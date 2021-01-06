@@ -1,13 +1,18 @@
 // Here, we handle all the events happening when
 // 1. 역 관리 button is clicked.
 
-import {addStationPreliminaryWork, deleteStation, loadLocalStorageData} from "./stationAddRemove.js"
+import {addStationPreliminaryWork, deleteStation} from "./stationAddRemove.js"
+import {loadLocalStorageData} from "./stationInit.js"
 
 export default class stationEventHandler {
     constructor() {
+        this.init();
         this.setStationAddBtnListener();
         this.setStationDeleteBtnListener();
-        this.setRefreshListener();
+    }
+
+    init() {
+        loadLocalStorageData();
     }
 
     setStationAddBtnListener() {
@@ -18,9 +23,5 @@ export default class stationEventHandler {
     setStationDeleteBtnListener() {
         const stationDeleteBtns = document.querySelectorAll("#station-name-table");
         stationDeleteBtns.forEach(btn => btn.addEventListener("click", deleteStation))
-    }
-
-    setRefreshListener() {
-        document.addEventListener("DOMContentLoaded", loadLocalStorageData)
     }
 }

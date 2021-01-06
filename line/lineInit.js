@@ -19,7 +19,7 @@ const optionTagUpdate = () => {
 }
 
 const lineTableUpdate = () => {
-
+    
 }
 
 export {optionTagUpdate, lineTableUpdate}
