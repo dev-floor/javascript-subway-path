@@ -1,17 +1,5 @@
 import {addStation} from "../station/stationAddRemove.js"
-import {constants} from "../constants.js"
-
-const userInputStationValidationWithoutAlert = (name) => {
-    const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
-    if(localStorageData) {
-        const localStorageDataToArray = JSON.parse(localStorageData);
-        
-        if(localStorageDataToArray.includes(name)) {
-            return false;
-        }
-    }
-    return true;
-}
+import {constants} from "../constantValues/constants.js"
 
 const setInitialState = () => {
 

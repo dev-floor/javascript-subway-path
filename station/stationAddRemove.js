@@ -1,5 +1,5 @@
-import {message} from "../message.js"
-import {constants} from "../constants.js"
+import {message} from "../constantValues/message.js"
+import {constants} from "../constantValues/constants.js"
 
 const addStationPreliminaryWork = () => {
     const userInputStation = document.querySelector("#station-name-input").value;
