@@ -4,14 +4,14 @@ import Line from "../line/lineInit.js";
 
 const setInitialState = () => {
     const localStorageStationData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
-    const localStorageLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_LINE);
+    const localStorageLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
     
     // 7 stations adding.
-    if(!localStorageStationData) {
+    if(localStorageStationData === "[]") {
         addStationToEmptyLocalStorage();
     }
 
-    if(!localStorageLineData) {
+    if(localStorageLineData === "[]") {
         addLineToEmptyLocalStorage();
     }
 
