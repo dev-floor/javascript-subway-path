@@ -45,19 +45,18 @@ const addStation = (inputStation) => {
 
 const deleteStation = (event) => {
     if(event.target.matches(".station-delete-button") && confirm(message.DELETE_STATION_BTN_PRESSED)) {
+        // remove from table.
         const removeTarget = event.target.closest(constants.TABLE_TARGET);
+        removeTarget.remove();
 
         // delete from localStorage.
         const removeStationName = removeTarget.childNodes[constants.STATION_VALUE_CHILDNODE_INDEX].innerHTML;
         
         const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
         const localStorageArray = JSON.parse(localStorageData);
-        const removedAfter = localStorageArray.filter(x => x !== removeStationName);
+        const removedAfter = localStorageArray.filter(station => station !== removeStationName);
         localStorage.setItem(constants.LOCAL_STORAGE_KEY_STATION, JSON.stringify(removedAfter));
         
-        // remove from table.
-        removeTarget.remove();
-
         // line select option update.
         optionTagUpdate();
     }

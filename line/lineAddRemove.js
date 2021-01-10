@@ -37,12 +37,26 @@ const upperLowerLineValidation = (upper, lower) => upper === lower ? alert(messa
 
 const distanceDurationValidation = (distance, duration) => (distance > 0 && duration > 0 && typeof(distance) !== "number" && typeof(duration) !== "number") ? 1 : alert(message.INPUT_DISTANCE_DURAION_LESS_THAN_ZERO) ;
 
+
 const addLine = (line, upper, lower, distance, time) => {
     
 }
 
-const deleteLine = (e) => {
+const deleteLine = (event) => {
+    if (event.target.matches(".line-delete-button") && confirm(message.DELETE_LINE_BTN_PRESSED)) {
+        // remove from table.
+        const removeTarget = event.target.closest(constants.TABLE_TARGET);
+        removeTarget.remove();
 
+        // delete from localStorage
+        const removeLineName = removeTarget.childNodes[constants.LINE_VALUE_CHILDNODE_INDEX].innerHTML;
+        
+        const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+        const localStorageArray = JSON.parse(localStorageData);
+        const removedAfter = localStorageArray.filter(lineInfo => lineInfo.line !== removeLineName);
+        localStorage.setItem(constants.LOCAL_STORAGE_KEY_ALLLINE, JSON.stringify(removedAfter));
+        
+    }
 }
 
 export {addLinePreliminaryWork, deleteLine}
