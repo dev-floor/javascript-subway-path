@@ -10,24 +10,35 @@ const addLinePreliminaryWork  = () => {
     const distance = document.querySelector("#line-distance").value;
     const duration = document.querySelector("#line-time").value;
 
-    userInputLineValidation(userInputLine) && upperLowerLineValidation(upperStation, lowerStation) && distanceDurationValidation(distance, duration) 
-    ? addLine(userInputLine, upperStation, lowerStation, distance, duration) : 0;
+    (userInputLineFormatValidation(userInputLine) && upperLowerLineValidation(upperStation, lowerStation) && distanceDurationValidation(distance, duration) && userInputLineOverlapValidation(userInputLine)) ? addLine(userInputLine, upperStation, lowerStation, distance, duration) : 0;
 }
 
-const userInputLineValidation = (line) => {
-    const unit = line.substr(-2);
-    if(unit !== constants.LINE_NAME_FORMAT) {
-        alert(message.LINE_NAME_FORMAT_INAPPROPRIATE);
-        return ;
+const userInputLineFormatValidation = (line) => (line.substr(-constants.LINE_NAME_FORMAT.length) !== constants.LINE_NAME_FORMAT) ? alert(message.LINE_NAME_FORMAT_INAPPROPRIATE) : true ;
+
+const userInputLineOverlapValidation = (line) => {
+    const localStorageLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+
+    if(localStorageLineData) {
+        const localStorageLineDataToArray = JSON.parse(localStorageLineData);
+
+        // localStorageLineDataToArray.every((lineInfo) => lineInfo.line !== line) === true ? true : false; 이거랑,
+        // judge === true ? true : false; --> 이거 안됨. 왜? 도대체? 너무 궁금.
+
+        let judge = localStorageLineDataToArray.every((lineInfo) => lineInfo.line !== line);
+        if(judge === true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
-const upperLowerLineValidation = (upper, lower) => { upper !== lower ? 1 : 0 }
+const upperLowerLineValidation = (upper, lower) => upper === lower ? alert(message.UPPER_LOWER_OVERLAPPED) : 1 ;
 
-const distanceDurationValidation = (distance, duration) => { (distance > 0 && duration > 0) ? 1 : 0 }
+const distanceDurationValidation = (distance, duration) => (distance > 0 && duration > 0 && typeof(distance) !== "number" && typeof(duration) !== "number") ? 1 : alert(message.INPUT_DISTANCE_DURAION_LESS_THAN_ZERO) ;
 
 const addLine = (line, upper, lower, distance, time) => {
-
+    
 }
 
 const deleteLine = (e) => {
