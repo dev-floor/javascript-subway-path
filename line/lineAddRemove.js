@@ -1,5 +1,6 @@
 import {message} from "../constantValues/message.js"
 import {constants} from "../constantValues/constants.js"
+import {sectionControlBtnUpdate} from "../section/sectionInit.js"
 
 const addLinePreliminaryWork  = () => {
     const userInputLine = document.querySelector("#line-name-input").value;
@@ -56,6 +57,8 @@ const deleteLine = (event) => {
         const removedAfter = localStorageArray.filter(lineInfo => lineInfo.line !== removeLineName);
         localStorage.setItem(constants.LOCAL_STORAGE_KEY_ALLLINE, JSON.stringify(removedAfter));
         
+        // line select button update in section tab.
+        sectionControlBtnUpdate();
     }
 }
 
