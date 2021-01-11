@@ -40,4 +40,4 @@ const lineTableUpdate = () => {
     }
 }
 
-export {optionTagUpdate, lineTableUpdate}
+export {optionTagUpdate, lineTableUpdate};

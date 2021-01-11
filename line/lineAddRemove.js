@@ -1,6 +1,8 @@
 import {message} from "../constantValues/message.js"
 import {constants} from "../constantValues/constants.js"
-import {sectionControlBtnUpdate} from "../section/sectionInit.js"
+import Line, {lineTableUpdate} from "./lineInit.js";
+// 윗 줄 선언 방법 주의!
+import Section, {sectionControlBtnUpdate} from "../section/sectionInit.js";
 
 const addLinePreliminaryWork  = () => {
     const userInputLine = document.querySelector("#line-name-input").value;
@@ -38,9 +40,23 @@ const upperLowerLineValidation = (upper, lower) => upper === lower ? alert(messa
 
 const distanceDurationValidation = (distance, duration) => (distance > 0 && duration > 0 && typeof(distance) !== "number" && typeof(duration) !== "number") ? 1 : alert(message.INPUT_DISTANCE_DURAION_LESS_THAN_ZERO) ;
 
-
 const addLine = (line, upper, lower, distance, time) => {
+    // localStorage _ all Line 등록
+    const localStorageDataAllLine = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+    const localStorageDataAllLineArray = JSON.parse(localStorageDataAllLine);
+    localStorageDataAllLineArray.push(new Line(line, upper, lower));
+    localStorage.setItem(constants.LOCAL_STORAGE_KEY_ALLLINE, JSON.stringify(localStorageDataAllLineArray));
+
+    // localStorage _ each Line 등록
+    const addedLine = [
+        new Section(upper, distance, time),
+        new Section(lower, 0, 0)
+    ];
+
+    localStorage.setItem(line, JSON.stringify(addedLine));
     
+    lineTableUpdate();
+    sectionControlBtnUpdate();
 }
 
 const deleteLine = (event) => {
@@ -53,8 +69,8 @@ const deleteLine = (event) => {
         const removeLineName = removeTarget.childNodes[constants.LINE_VALUE_CHILDNODE_INDEX].innerHTML;
 
         const localStorageDataAllLine = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
-        const localStorageAllLineArray = JSON.parse(localStorageDataAllLine);
-        const removedAfter = localStorageAllLineArray.filter(lineInfo => lineInfo.line !== removeLineName);
+        const localStorageDataAllLineArray = JSON.parse(localStorageDataAllLine);
+        const removedAfter = localStorageDataAllLineArray.filter(lineInfo => lineInfo.line !== removeLineName);
         localStorage.setItem(constants.LOCAL_STORAGE_KEY_ALLLINE, JSON.stringify(removedAfter));
 
         // delete from localStorage(individual line)
