@@ -49,13 +49,16 @@ const deleteLine = (event) => {
         const removeTarget = event.target.closest(constants.TABLE_TARGET);
         removeTarget.remove();
 
-        // delete from localStorage
+        // delete from localStorage(allLine)
         const removeLineName = removeTarget.childNodes[constants.LINE_VALUE_CHILDNODE_INDEX].innerHTML;
-        
-        const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
-        const localStorageArray = JSON.parse(localStorageData);
-        const removedAfter = localStorageArray.filter(lineInfo => lineInfo.line !== removeLineName);
+
+        const localStorageDataAllLine = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+        const localStorageAllLineArray = JSON.parse(localStorageDataAllLine);
+        const removedAfter = localStorageAllLineArray.filter(lineInfo => lineInfo.line !== removeLineName);
         localStorage.setItem(constants.LOCAL_STORAGE_KEY_ALLLINE, JSON.stringify(removedAfter));
+
+        // delete from localStorage(individual line)
+        localStorage.removeItem(removeLineName);
         
         // line select button update in section tab.
         sectionControlBtnUpdate();
