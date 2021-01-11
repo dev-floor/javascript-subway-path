@@ -17,3 +17,22 @@ table {
 #line-name-input {
   margin-bottom: 20px;
 }
+
+.map h3 {
+  margin: 15px;
+  color: blue;
+}
+
+.map > ul {
+  margin: 5px;
+}
+
+.map > li {
+  margin-left: 10px;
+}
+
+.list-hollow-circle {
+  list-style-type: circle;
+  color: brown;
+  margin: 0px;
+}
