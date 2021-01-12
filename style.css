@@ -18,6 +18,10 @@ table {
   margin-bottom: 20px;
 }
 
+#section-status-table {
+  margin-top: 30px;
+}
+
 .map h3 {
   margin: 15px;
   color: blue;

@@ -32,10 +32,10 @@ const lineTableUpdate = () => {
     if(localStorageLineData) {
         const localStorageLineDataToArray = JSON.parse(localStorageLineData);
 
-        const LineList = document.querySelector("#line-status-table tbody");
-        LineList.innerHTML = `<tr><th>노선 이름</th><th>상행 종점역</th><th>하행 종점역</th><th>설정</th></tr>`;
+        const lineList = document.querySelector("#line-status-table tbody");
+        lineList.innerHTML = `<tr><th>노선 이름</th><th>상행 종점역</th><th>하행 종점역</th><th>설정</th></tr>`;
         localStorageLineDataToArray.forEach(line => {
-            LineList.innerHTML += `<tr><td>${line.line}</td><td>${line.upperStation}</td><td>${line.lowerStation}</td><td><button class = "line-delete-button">삭제</button></td></tr>`;
+            lineList.innerHTML += `<tr><td>${line.line}</td><td>${line.upperStation}</td><td>${line.lowerStation}</td><td><button class = "line-delete-button">삭제</button></td></tr>`;
         })
     }
 }

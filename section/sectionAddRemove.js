@@ -1,3 +1,5 @@
+import {sectionOptionTagUpdate, sectionTableUpdate} from "./sectionInit.js"
+
 const sectionControlPreliminaryWork = (event) => {
     if(event.target.matches(".section-line-menu-button")){
         const pickedLine = event.target.innerHTML;
@@ -8,25 +10,12 @@ const sectionControlPreliminaryWork = (event) => {
         sectionSelectedTitle.innerHTML = pickedLine;
 
         sectionOptionTagUpdate(pickedLine);
+        sectionTableUpdate(pickedLine);
     }
 }
 
-const sectionOptionTagUpdate = (line) => {
-    const localStorageEachLineData = localStorage.getItem(line);
-
-    const upperStationSelect = document.querySelector("#section-start-station-selector");
-    const lowerStationSelect = document.querySelector("#section-end-station-selector");
-
-    upperStationSelect.innerHTML = "";
-    lowerStationSelect.innerHTML = "";
+const addSection = () => {
     
-    if(localStorageEachLineData) {
-        const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
-        localStorageEachLineDataArray.forEach(stationInfo => {
-            upperStationSelect.innerHTML += `<option>${stationInfo.station}</option>`;
-            lowerStationSelect.innerHTML += `<option>${stationInfo.station}</option>`;
-        })
-    }
 }
 
-export {sectionControlPreliminaryWork};
+export {sectionControlPreliminaryWork, addSection};
