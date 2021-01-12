@@ -75,7 +75,24 @@
 
         </div>
 
-        <div class = "section-select-screen">
+        <div class = "section-select-screen hidden">
+          <h3 id="selected-line"></h3>
+
+          <h4>구간등록</h4>
+
+          <div>상행역 
+            <select id="section-start-station-selector">
+            </select>         
+          </div>
+
+          <div>하행역 
+            <select id="section-end-station-selector">
+            </select>         
+          </div>
+
+          <div style = "margin: 10px 0px">구간거리 <input type="text" id = "new-section-distance" placeholder="구간 거리(km)를 입력하세요"> 소요시간 <input type="text" id="new-section-time" placeholder="소요시간(분)을 입력하세요"> <button id="section-add-button">등록</button>
+          </div>
+
         </div>
       </div>
 
