@@ -7,7 +7,8 @@ const message = {
     LINE_NAME_FORMAT_INAPPROPRIATE : "◯◯선 <-- 형식으로 입력해주세요.",
     UPPER_LOWER_OVERLAPPED : "상행종점과 하행종점이 같습니다. 다르게 설정해야 합니다.",
     INPUT_DISTANCE_DURAION_LESS_THAN_ZERO : "구간 거리와 소요시간 값은 0이상인 숫자여야 합니다.",
-    NO_SELECTED_LINE_INFO_IN_STORAGE: "선택하신 노선정보가 없습니다."
+    NO_SELECTED_LINE_INFO_IN_STORAGE: "선택하신 노선정보가 없습니다.",
+    DELETE_SECTION_BTN_PRESSED : "선택하신 역을 노선에서 제거하시겠습니까?"
 };
 
 export {message};

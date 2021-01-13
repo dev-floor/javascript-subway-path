@@ -1,10 +1,12 @@
 import {sectionControlBtnUpdate} from "./sectionInit.js"
-import {sectionControlPreliminaryWork, addSection} from "./sectionAddRemove.js"
+import {sectionControlPreliminaryWork, addSection, deleteSection} from "./sectionAddRemove.js"
 
 export default class sectionEventHandler {
     constructor() {
         this.init()
         this.setSectionControlBtnListener();
+        this.setSectionAddBtnListner();
+        this.setSectionDeleteBtnListener();
     }
 
     init() {
@@ -22,8 +24,9 @@ export default class sectionEventHandler {
         sectionAddBtn.addEventListener("click", addSection);
     }
 
-    setLineDeleteBtnListener() {
-
+    setSectionDeleteBtnListener() {
+        const sectionDeleteBtn = document.querySelectorAll("#section-status-table");
+        sectionDeleteBtn.forEach(btn => btn.addEventListener("click", deleteSection))
     }
 
 }
