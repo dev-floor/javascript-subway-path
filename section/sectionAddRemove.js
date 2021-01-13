@@ -17,6 +17,34 @@ const sectionControlPreliminaryWork = (event) => {
     }
 }
 
+const addSectionPreliminaryWork = () => {
+    const currentLine = document.getElementById("selected-line").innerHTML;
+    const upperStation = document.querySelector("#section-start-station-selector").value;
+    const lowerStation = document.querySelector("#section-end-station-selector").value;
+    const sectionDistance = document.querySelector("#new-section-distance").value;
+    const sectionDuration = document.querySelector("#new-section-time").value;
+
+    sectionAddValidation(currentLine, upperStation, lowerStation, sectionDistance, sectionDuration) ? addSection(currentLine, upperStation, lowerStation, sectionDistance, sectionDuration) : 0
+}
+
+const sectionAddValidation = (line, upper, lower, distance, duration) => {
+    // 1. upper가 애초에 line에 없다
+    // 2. line에 이미 upper - lower 가 있다
+    // 3. distacne duration 양수
+    const localStorageEachLineData = localStorage.getItem(line);
+    const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
+    const upperInLine = localStorageEachLineDataArray.some(sectionInfo => sectionInfo.station === upper);
+    const lowerNotInLine = localStorageEachLineDataArray.every(sectionInfo => sectionInfo.station !== lower);
+    const distDurValid = (distance > 0 && duration > 0) ? 1 : 0;
+    
+    // (upperInLine && lowerNotInLine && distDurValid) ? true : false; 왜또...
+    if(upperInLine && lowerNotInLine && distDurValid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const addSection = (line, upper, lower, distance, duration) => {
     const localStorageEachLineData = localStorage.getItem(line);
 
@@ -92,4 +120,4 @@ const allLineLocalStorageUpdate = (line) => {
     lineTableUpdate();
 }
 
-export {sectionControlPreliminaryWork, addSection, deleteSection};
+export {sectionControlPreliminaryWork, addSectionPreliminaryWork, deleteSection};

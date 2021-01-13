@@ -1,5 +1,5 @@
 import {sectionControlBtnUpdate} from "./sectionInit.js"
-import {sectionControlPreliminaryWork, addSection, deleteSection} from "./sectionAddRemove.js"
+import {sectionControlPreliminaryWork, addSectionPreliminaryWork, deleteSection} from "./sectionAddRemove.js"
 
 export default class sectionEventHandler {
     constructor() {
@@ -21,7 +21,7 @@ export default class sectionEventHandler {
 
     setSectionAddBtnListner() {
         const sectionAddBtn = document.querySelector("#section-add-button");
-        sectionAddBtn.addEventListener("click", addSection);
+        sectionAddBtn.addEventListener("click", addSectionPreliminaryWork);
     }
 
     setSectionDeleteBtnListener() {
