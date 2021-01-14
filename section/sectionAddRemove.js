@@ -117,6 +117,7 @@ const removeSectionFromLocalStorage = (currentLine, removeSectionName) => {
     })
     localStorage.setItem(currentLine, JSON.stringify(localStorageEachLineDataArray));
     allLineLocalStorageUpdate(currentLine);
+    return true;
 }
 
 const allLineLocalStorageUpdate = (line) => {

@@ -1,3 +1,5 @@
+import { constants } from "../constantValues/constants.js";
+
 const stationManager = document.getElementById("station-manager");
 const lineManager = document.getElementById("line-manager");
 const sectionManager = document.getElementById("section-manager");
@@ -18,7 +20,7 @@ const makeAllHidden = () => {
 const showThisOnly = (e) => {
     makeAllHidden();
     
-    const selectedId = e.target.id.slice(0, e.target.id.length - 7);
+    const selectedId = e.target.id.slice(0, e.target.id.length - constants.MANAGER_BUTTON_STRING_LENGTH);
     document.getElementById(selectedId).className = "show";
 
 }
