@@ -10,6 +10,7 @@ const message = {
     UPPER_LOWER_OVERLAPPED : "상행종점과 하행종점이 같습니다. 다르게 설정해야 합니다.",
     INPUT_DISTANCE_DURAION_LESS_THAN_ZERO : "구간 거리와 소요시간 값은 0이상인 숫자여야 합니다.",
     NO_SELECTED_LINE_INFO_IN_STORAGE: "선택하신 노선정보가 없습니다.",
+    LINE_REGISTERED_STATION_DELETE_IMPOSSIBLE : "노선에 등록된 역은 삭제할 수 없습니다.",
     DELETE_SECTION_LESS_THAN_TWO_STATION: "2개이하의 역이 존재하는 노선에서는 제거가 불가능합니다.",
     DELETE_SECTION_BTN_PRESSED : "선택하신 역을 노선에서 제거하시겠습니까?"
 };

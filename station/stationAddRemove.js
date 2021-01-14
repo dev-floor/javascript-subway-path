@@ -46,21 +46,42 @@ const addStation = (inputStation) => {
 
 const deleteStation = (event) => {
     if(event.target.matches(".station-delete-button") && confirm(message.DELETE_STATION_BTN_PRESSED)) {
-        // remove from table.
+         // delete from localStorage.
         const removeTarget = event.target.closest(constants.TABLE_TARGET);
-        removeTarget.remove();
-
-        // delete from localStorage.
         const removeStationName = removeTarget.childNodes[constants.STATION_VALUE_CHILDNODE_INDEX].innerHTML;
-        
-        const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
-        const localStorageArray = JSON.parse(localStorageData);
-        const removedAfter = localStorageArray.filter(station => station !== removeStationName);
-        localStorage.setItem(constants.LOCAL_STORAGE_KEY_STATION, JSON.stringify(removedAfter));
-        
-        // line select option update.
-        optionTagUpdate();
+        if(checkLineRegisterStation(removeStationName)) {
+            const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
+            const localStorageArray = JSON.parse(localStorageData);
+            const removedAfter = localStorageArray.filter(station => station !== removeStationName);
+            localStorage.setItem(constants.LOCAL_STORAGE_KEY_STATION, JSON.stringify(removedAfter));
+
+            // remove from table.
+            const removeTarget = event.target.closest(constants.TABLE_TARGET);
+            removeTarget.remove();
+            
+            // line select option update.
+            optionTagUpdate();
+        }
     }
+}
+
+const checkLineRegisterStation = (checkStation) => {
+    // all Line 에서 호선 정보 다 끌고 와서 해야함.
+    let isLineRegisteredStation = false;
+    const localStorageLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+    const localStorageLineDataToArray = JSON.parse(localStorageLineData);
+    const allLineName = localStorageLineDataToArray.map(lineInfo => lineInfo.line);
+    allLineName.forEach(line => {
+        const localStorageEachLineData = localStorage.getItem(line);
+        const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
+        localStorageEachLineDataArray.forEach(sectionInfo => {
+            if(sectionInfo.station === checkStation) {
+                isLineRegisteredStation = true;
+            }
+        })
+    })
+    if(isLineRegisteredStation === true) alert(message.LINE_REGISTERED_STATION_DELETE_IMPOSSIBLE);
+    return !isLineRegisteredStation;
 }
 
 export {addStationPreliminaryWork, deleteStation, addStation};
