@@ -28,9 +28,6 @@ const addSectionPreliminaryWork = () => {
 }
 
 const sectionAddValidation = (line, upper, lower, distance, duration) => {
-    // 1. upper가 애초에 line에 없다
-    // 2. line에 이미 upper - lower 가 있다
-    // 3. distacne duration 양수
     const localStorageEachLineData = localStorage.getItem(line);
     const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
     const upperInLine = localStorageEachLineDataArray.some(sectionInfo => sectionInfo.station === upper);
@@ -38,11 +35,19 @@ const sectionAddValidation = (line, upper, lower, distance, duration) => {
     const distDurValid = (distance > 0 && duration > 0) ? 1 : 0;
     
     // (upperInLine && lowerNotInLine && distDurValid) ? true : false; 왜또...
-    if(upperInLine && lowerNotInLine && distDurValid) {
-        return true;
-    } else {
+    if(upperInLine === false) {
+        alert(message.INPUT_UPPER_NOT_EXIST_IN_LINE);
         return false;
     }
+    if(lowerNotInLine === false) {
+        alert(message.INPUT_LOWER_ALREADY_EXIST_IN_LINE);
+        return false;
+    }
+    if(distDurValid === false) {
+        alert(message.INPUT_DISTANCE_DURAION_LESS_THAN_ZERO);
+        return false;
+    }
+    return true;
 }
 
 const addSection = (line, upper, lower, distance, duration) => {
@@ -62,6 +67,7 @@ const addSection = (line, upper, lower, distance, duration) => {
         
         sectionTableUpdate(line);
         sectionOptionTagUpdate(line);
+        allLineLocalStorageUpdate(line);
     }
 }
 
@@ -77,19 +83,24 @@ const deleteSection = (event) => {
     if(event.target.matches(".section-delete-button") && confirm(message.DELETE_SECTION_BTN_PRESSED)) {
         // 표에서 삭제, localStorage에서 삭제
         const removeTarget = event.target.closest(constants.TABLE_TARGET);
-        removeTarget.remove();
 
         const currentLine = document.getElementById("selected-line").innerHTML;
         const removeSectionName = removeTarget.childNodes[constants.SECTION_VALUE_CHILDNODE_INDEX].innerHTML;
-
-        removeSectionFromLocalStorage(currentLine, removeSectionName);
-        sectionTableUpdate(currentLine);
+        
+        if(removeSectionFromLocalStorage(currentLine, removeSectionName)) {
+            sectionTableUpdate(currentLine);
+            removeTarget.remove();
+        }
     }
 }
 
 const removeSectionFromLocalStorage = (currentLine, removeSectionName) => {
     const localStorageEachLineData = localStorage.getItem(currentLine);
     const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
+    if(localStorageEachLineDataArray.length <= 2) {
+        alert(message.DELETE_SECTION_LESS_THAN_TWO_STATION)
+        return false;
+    }
     localStorageEachLineDataArray.forEach((sectionInfo, index) => {
         if(sectionInfo.station === removeSectionName && index !== localStorageEachLineDataArray.length - 1 && index === 0) {
             localStorageEachLineDataArray.splice(0, 1);
