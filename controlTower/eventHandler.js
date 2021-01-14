@@ -4,6 +4,7 @@ import stationEventHandler from "../station/stationEventHandler.js";
 import lineEventHandler from "../line/lineEventHandler.js";
 import sectionEventHandler from "../section/sectionEventHandler.js";
 import mapPrintEventHandler from "../map/mapPrintEventHandler.js";
+import findPathEventHandler from "../path/findPathEventHandler.js";
 
 export default class controlAllBtns {
     constructor() {
@@ -11,6 +12,7 @@ export default class controlAllBtns {
         this.setLineEventListener();
         this.setSectionEventListener();
         this.setMapPrintEventListener();
+        this.setFindPathEventListener();
      }
 
      setStationEventListner() {
@@ -27,5 +29,9 @@ export default class controlAllBtns {
 
      setMapPrintEventListener() { 
         new mapPrintEventHandler();
+     }
+
+     setFindPathEventListener() {
+         new findPathEventHandler();
      }
 }

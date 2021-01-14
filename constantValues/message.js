@@ -12,7 +12,8 @@ const message = {
     NO_SELECTED_LINE_INFO_IN_STORAGE: "선택하신 노선정보가 없습니다.",
     LINE_REGISTERED_STATION_DELETE_IMPOSSIBLE : "노선에 등록된 역은 삭제할 수 없습니다.",
     DELETE_SECTION_LESS_THAN_TWO_STATION: "2개이하의 역이 존재하는 노선에서는 제거가 불가능합니다.",
-    DELETE_SECTION_BTN_PRESSED : "선택하신 역을 노선에서 제거하시겠습니까?"
+    DELETE_SECTION_BTN_PRESSED : "선택하신 역을 노선에서 제거하시겠습니까?",
+    FIND_PATH_NO_SUCH_STATION : "입력하신 역은 존재하지 않는 역입니다. 다시 확인 후에 입력하십시오."
 };
 
 export {message};

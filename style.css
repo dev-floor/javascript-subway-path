@@ -41,3 +41,20 @@ table {
   color: brown;
   margin: 0px;
 }
+
+#departure-station-name-input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#arrival-station-name-input {
+  margin-bottom: 30px;
+}
+
+#search-button {
+  margin-top: 30px;
+}
+
+#search-button {
+  margin-left: 10px;
+}
