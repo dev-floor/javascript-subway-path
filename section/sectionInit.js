@@ -10,14 +10,14 @@ export default class Section {
 }
 
 const sectionControlBtnUpdate = () => {
-    const localStorageData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+    const localStorageAllLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
     const sectionControlBtns = document.querySelector(".section-line-menu-button-control");
 
-    if(localStorageData) {
-        const localStorageArray = JSON.parse(localStorageData);
+    if(localStorageAllLineData) {
+        const localStorageAllLineDataArray = JSON.parse(localStorageAllLineData);
 
         sectionControlBtns.innerHTML = "";
-        localStorageArray.forEach( lineInfo => sectionControlBtns.innerHTML += `<button class="section-line-menu-button">${lineInfo.line}</button> ` );
+        localStorageAllLineDataArray.forEach( lineInfo => sectionControlBtns.innerHTML += `<button class="section-line-menu-button">${lineInfo.line}</button> ` );
     }
 }
 
@@ -43,11 +43,11 @@ const sectionTableUpdate = (pickedLine) => {
     const localStorageEachLineData = localStorage.getItem(pickedLine);
 
     if(localStorageEachLineData) {
-        const localStorageEachLineDataToArray = JSON.parse(localStorageEachLineData);
+        const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
 
         const sectionList = document.querySelector("#section-status-table");
         sectionList.innerHTML = `<tr><th>순서</th><th>역 이름</th><th>설정</th></tr>`;
-        localStorageEachLineDataToArray.forEach((sectionInfo, index) => {
+        localStorageEachLineDataArray.forEach((sectionInfo, index) => {
             sectionList.innerHTML += `<tr><td>${index}</td><td>${sectionInfo.station}</td><td><button class = "section-delete-button">노선에서 제거</button></td></tr>`
         })
     } else {

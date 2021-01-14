@@ -29,7 +29,7 @@ const userInputStationValidation = (name) => {
 const addStation = (inputStation) => {
     const localStorageStationData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
     
-    if(localStorageData) {
+    if(localStorageStationData) {
         const localStorageStationDataArray = JSON.parse(localStorageStationData);
         localStorageStationDataArray.push(inputStation);
         localStorage.setItem(constants.LOCAL_STORAGE_KEY_STATION, JSON.stringify(localStorageStationDataArray));

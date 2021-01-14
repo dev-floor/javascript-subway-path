@@ -34,7 +34,7 @@ const sectionAddValidation = (line, upper, lower, distance, duration) => {
     const lowerNotInLine = localStorageEachLineDataArray.every(sectionInfo => sectionInfo.station !== lower);
     const distDurValid = (distance > 0 && duration > 0) ? 1 : 0;
     
-    // (upperInLine && lowerNotInLine && distDurValid) ? true : false; 왜또...
+    // (upperInLine && lowerNotInLine && distDurValid) ? true : false; 왜 또...
     if(upperInLine === false) {
         alert(message.INPUT_UPPER_NOT_EXIST_IN_LINE);
         return false;
@@ -58,9 +58,9 @@ const addSection = (line, upper, lower, distance, duration) => {
         const newSection = new Section(lower, distance, duration);
         locatStorageEachLineDataArray.forEach((sectionInfo, index) => {
             if(sectionInfo.station === upper && index !== locatStorageEachLineDataArray.length - 1) {
-                addSectionLocalStorageManage(locatStorageEachLineDataArray, index, sectionInfo, newSection, distance, duration, 2, 3);
+                addSectionLocalStorageManage(locatStorageEachLineDataArray, index, sectionInfo, newSection, distance, duration, constants.SECTION_ADD_DEFAULT_DISTANCE, constants.SECTION_ADD_DEFAULT_DURATION);
              } else if(sectionInfo.station === upper && index === locatStorageEachLineDataArray.length - 1) {
-                addSectionLocalStorageManage(locatStorageEachLineDataArray, index, sectionInfo, newSection, distance, duration, 0, 0);
+                addSectionLocalStorageManage(locatStorageEachLineDataArray, index, sectionInfo, newSection, distance, duration, constants.SECTION_ADD_END_POINT_DISTANCE, constants.SECTION_ADD_END_POINT_DURATION);
              }
         })
         localStorage.setItem(line, JSON.stringify(locatStorageEachLineDataArray));
@@ -97,7 +97,7 @@ const deleteSection = (event) => {
 const removeSectionFromLocalStorage = (currentLine, removeSectionName) => {
     const localStorageEachLineData = localStorage.getItem(currentLine);
     const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
-    if(localStorageEachLineDataArray.length <= 2) {
+    if(localStorageEachLineDataArray.length <= constants.MINIMUM_NUMBER_OF_SECTION) {
         alert(message.DELETE_SECTION_LESS_THAN_TWO_STATION)
         return false;
     }
@@ -127,7 +127,7 @@ const allLineLocalStorageUpdate = (line) => {
     const localStorageCurrentLineDataArray = JSON.parse(localStorageCurrentLineData);
 
     const firstLastStation = localStorageCurrentLineDataArray.filter((sectionInfo, index) => index === 0 || index === localStorageCurrentLineDataArray.length - 1 )
-    localStorageAllLineDataArray.forEach(lineInfo => lineInfo.line === line ? [lineInfo.upperStation, lineInfo.lowerStation] = [firstLastStation[0].station, firstLastStation[1].station] : 0 )
+    localStorageAllLineDataArray.forEach(lineInfo => lineInfo.line === line ? [lineInfo.upperStation, lineInfo.lowerStation] = [firstLastStation[constants.FIRST_STATION_INDEX].station, firstLastStation[constants.LAST_STATION_INDEX].station] : 0 )
     localStorage.setItem(constants.LOCAL_STORAGE_KEY_ALLLINE, JSON.stringify(localStorageAllLineDataArray));
     lineTableUpdate();
 }

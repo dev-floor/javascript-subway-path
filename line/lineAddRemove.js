@@ -1,7 +1,6 @@
 import {message} from "../constantValues/message.js"
 import {constants} from "../constantValues/constants.js"
 import Line, {lineTableUpdate} from "./lineInit.js";
-// 윗 줄 선언 방법 주의!
 import Section, {sectionControlBtnUpdate} from "../section/sectionInit.js";
 
 const addLinePreliminaryWork  = () => {
@@ -19,15 +18,15 @@ const addLinePreliminaryWork  = () => {
 const userInputLineFormatValidation = (line) => (line.substr(-constants.LINE_NAME_FORMAT.length) !== constants.LINE_NAME_FORMAT) ? alert(message.LINE_NAME_FORMAT_INAPPROPRIATE) : true ;
 
 const userInputLineOverlapValidation = (line) => {
-    const localStorageLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+    const localStorageAllLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
 
-    if(localStorageLineData) {
-        const localStorageLineDataToArray = JSON.parse(localStorageLineData);
+    if(localStorageAllLineData) {
+        const localStorageAllLineDataArray = JSON.parse(localStorageAllLineData);
 
-        // localStorageLineDataToArray.every((lineInfo) => lineInfo.line !== line) === true ? true : false; 이거랑,
+        // localStorageAllLineDataArray.every((lineInfo) => lineInfo.line !== line) === true ? true : false; 이거랑,
         // judge === true ? true : false; --> 이거 안됨. 왜? 도대체? 너무 궁금.
 
-        let judge = localStorageLineDataToArray.every((lineInfo) => lineInfo.line !== line);
+        let judge = localStorageAllLineDataArray.every((lineInfo) => lineInfo.line !== line);
         if(judge === true) {
             return true;
         } else {
@@ -38,7 +37,7 @@ const userInputLineOverlapValidation = (line) => {
 
 const upperLowerLineValidation = (upper, lower) => upper === lower ? alert(message.UPPER_LOWER_OVERLAPPED) : 1 ;
 
-const distanceDurationValidation = (distance, duration) => (distance > 0 && duration > 0 && typeof(distance) !== "number" && typeof(duration) !== "number") ? 1 : alert(message.INPUT_DISTANCE_DURAION_LESS_THAN_ZERO) ;
+const distanceDurationValidation = (distance, duration) => (distance > 0 && duration > 0) ? 1 : alert(message.INPUT_DISTANCE_DURAION_LESS_THAN_ZERO) ;
 
 const addLine = (line, upper, lower, distance, time) => {
     // localStorage _ all Line 등록

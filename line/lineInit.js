@@ -18,8 +18,8 @@ const optionTagUpdate = () => {
     lowerStationSelect.innerHTML = "";
 
     if(localStorageStationData) {
-        const localStorageStationDataToArray = JSON.parse(localStorageStationData);
-        localStorageStationDataToArray.forEach(station => {
+        const localStorageStationDataArray = JSON.parse(localStorageStationData);
+        localStorageStationDataArray.forEach(station => {
             upperStationSelect.innerHTML += `<option>${station}</option>`;
             lowerStationSelect.innerHTML += `<option>${station}</option>`;
         })
@@ -27,14 +27,14 @@ const optionTagUpdate = () => {
 }
 
 const lineTableUpdate = () => {
-    const localStorageLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
+    const localStorageAllLineData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_ALLLINE);
 
-    if(localStorageLineData) {
-        const localStorageLineDataToArray = JSON.parse(localStorageLineData);
+    if(localStorageAllLineData) {
+        const localStorageAllLineDataArray = JSON.parse(localStorageAllLineData);
 
         const lineList = document.querySelector("#line-status-table tbody");
         lineList.innerHTML = `<tr><th>노선 이름</th><th>상행 종점역</th><th>하행 종점역</th><th>설정</th></tr>`;
-        localStorageLineDataToArray.forEach(line => {
+        localStorageAllLineDataArray.forEach(line => {
             lineList.innerHTML += `<tr><td>${line.line}</td><td>${line.upperStation}</td><td>${line.lowerStation}</td><td><button class = "line-delete-button">삭제</button></td></tr>`;
         })
     }
