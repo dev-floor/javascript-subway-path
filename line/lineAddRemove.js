@@ -31,6 +31,7 @@ const userInputLineOverlapValidation = (line) => {
         if(judge === true) {
             return true;
         } else {
+            alert(message.INPUT_LINE_NAME_OVERLAPPED);
             return false;
         }
     }
