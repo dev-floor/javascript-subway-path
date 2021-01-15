@@ -18,10 +18,16 @@ const makeAllHidden = () => {
     sectionManager.className = "hidden";
     mapPrintManager.className = "hidden";
     findPathManager.className = "hidden";
+    stationManagerBtn.classList.remove("chosen");
+    lineManagerBtn.classList.remove("chosen");
+    sectionManagerBtn.classList.remove("chosen");
+    mapPrintManagerBtn.classList.remove("chosen");
+    findPathManagerBtn.classList.remove("chosen");
 }
 
 const showThisOnly = (e) => {
     makeAllHidden();
+    e.target.className = "chosen";
     
     const selectedId = e.target.id.slice(0, e.target.id.length - constants.MANAGER_BUTTON_STRING_LENGTH);
     document.getElementById(selectedId).className = "show";
