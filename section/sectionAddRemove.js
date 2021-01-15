@@ -2,6 +2,7 @@ import {constants} from "../constantValues/constants.js";
 import {message} from "../constantValues/message.js";
 import Section, {sectionOptionTagUpdate, sectionTableUpdate} from "./sectionInit.js";
 import {lineTableUpdate} from "../line/lineInit.js";
+import {allSectionInfoSave} from "../path/findInit.js";
 
 const sectionControlPreliminaryWork = (event) => {
     if(event.target.matches(".section-line-menu-button")){
@@ -21,8 +22,8 @@ const addSectionPreliminaryWork = () => {
     const currentLine = document.getElementById("selected-line").innerHTML;
     const upperStation = document.querySelector("#section-start-station-selector").value;
     const lowerStation = document.querySelector("#section-end-station-selector").value;
-    const sectionDistance = document.querySelector("#new-section-distance").value;
-    const sectionDuration = document.querySelector("#new-section-time").value;
+    const sectionDistance = parseFloat(document.querySelector("#new-section-distance").value);
+    const sectionDuration = parseFloat(document.querySelector("#new-section-time").value);
 
     sectionAddValidation(currentLine, upperStation, lowerStation, sectionDistance, sectionDuration) ? addSection(currentLine, upperStation, lowerStation, sectionDistance, sectionDuration) : 0
 }
@@ -32,7 +33,7 @@ const sectionAddValidation = (line, upper, lower, distance, duration) => {
     const localStorageEachLineDataArray = JSON.parse(localStorageEachLineData);
     const upperInLine = localStorageEachLineDataArray.some(sectionInfo => sectionInfo.station === upper);
     const lowerNotInLine = localStorageEachLineDataArray.every(sectionInfo => sectionInfo.station !== lower);
-    const distDurValid = (distance > 0 && duration > 0) ? 1 : 0;
+    const distDurValid = (distance > 0 && duration > 0 && typeof(distance) === "number" && typeof(duration) === "number") ? 1 : 0;
     
     // (upperInLine && lowerNotInLine && distDurValid) ? true : false; 왜 또...
     if(upperInLine === false) {
@@ -68,6 +69,7 @@ const addSection = (line, upper, lower, distance, duration) => {
         sectionTableUpdate(line);
         sectionOptionTagUpdate(line);
         allLineLocalStorageUpdate(line);
+        allSectionInfoSave();
     }
 }
 

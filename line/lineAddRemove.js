@@ -2,6 +2,7 @@ import {message} from "../constantValues/message.js"
 import {constants} from "../constantValues/constants.js"
 import Line, {lineTableUpdate} from "./lineInit.js";
 import Section, {sectionControlBtnUpdate} from "../section/sectionInit.js";
+import {allSectionInfoSave} from "../path/findInit.js";
 
 const addLinePreliminaryWork  = () => {
     const userInputLine = document.querySelector("#line-name-input").value;
@@ -9,8 +10,8 @@ const addLinePreliminaryWork  = () => {
     const upperStation = document.querySelector("#line-start-station-selector").value;
     const lowerStation = document.querySelector("#line-end-station-selector").value;
 
-    const distance = document.querySelector("#line-distance").value;
-    const duration = document.querySelector("#line-time").value;
+    const distance = parseFloat(document.querySelector("#line-distance").value);
+    const duration = parseFloat(document.querySelector("#line-time").value);
 
     (userInputLineFormatValidation(userInputLine) && upperLowerLineValidation(upperStation, lowerStation) && distanceDurationValidation(distance, duration) && userInputLineOverlapValidation(userInputLine)) ? addLine(userInputLine, upperStation, lowerStation, distance, duration) : 0;
 }
@@ -56,6 +57,7 @@ const addLine = (line, upper, lower, distance, time) => {
     
     lineTableUpdate();
     sectionControlBtnUpdate();
+    allSectionInfoSave();
 }
 
 const deleteLine = (event) => {
