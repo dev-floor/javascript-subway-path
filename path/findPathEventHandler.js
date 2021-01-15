@@ -1,8 +1,14 @@
+import {allSectionInfoSave} from "./findInit.js"
 import {findPathPreliminaryWork} from "./findPath.js";
 
 export default class findPathEventHandler {
     constructor() {
+        this.init();
         this.setfindPathBtnListener();
+    }
+
+    init() {
+        allSectionInfoSave();
     }
 
     setfindPathBtnListener() {
