@@ -7,23 +7,28 @@ const findPathPreliminaryWork = () => {
     const arrivalStation = document.getElementById("arrival-station-name-input").value;
     const findPathResultTable = document.getElementById("find-path-result");
 
+    if(findPathValidation(departureStation, arrivalStation)) {
+        findPath(departureStation, arrivalStation);
+        findPathResultTable.classList.remove("hidden");
+    }
+}
+
+const findPathValidation = (departure, arrival) => {
     // 1. localStorage - station에 두 역이 있는지..
     const localStorageStationData = localStorage.getItem(constants.LOCAL_STORAGE_KEY_STATION);
     const localStorageStationDataArray = JSON.parse(localStorageStationData);
-    const departureStationExist = localStorageStationDataArray.some(station => station === departureStation);
-    const arrivalStationExist = localStorageStationDataArray.some(station => station === arrivalStation);
+    const departureStationExist = localStorageStationDataArray.some(station => station === departure);
+    const arrivalStationExist = localStorageStationDataArray.some(station => station === arrival);
     if(!departureStationExist || !arrivalStationExist) {
         alert(message.FIND_PATH_NO_SUCH_STATION);
-        return ;
+        return false;
     }
-    
+
     // 2. 두 개의 역의 이름이 같은지
-    if(departureStation === arrivalStation) {
+    if(departure === arrival) {
         alert(message.FIND_PATH_DEPARTURE_ARRIVAL_SAME);
-        return;
+        return false;
     }
-    findPath(departureStation, arrivalStation);
-    findPathResultTable.classList.remove("hidden");
 }
 
 const findPath = (departureStation, arrivalStation) => {
