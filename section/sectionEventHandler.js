@@ -1,3 +1,6 @@
+// Here, we handle all the events happening when
+// 3. 구간 관리 button is clicked.
+
 import {sectionControlBtnUpdate} from "./sectionInit.js"
 import {sectionControlPreliminaryWork, addSectionPreliminaryWork, deleteSection} from "./sectionAddRemove.js"
 

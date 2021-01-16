@@ -1,3 +1,6 @@
+// Here, we handle all the events happening when
+// 5. 경로 조회 button is clicked.
+
 import {allSectionInfoSave} from "./findInit.js"
 import {findPathPreliminaryWork} from "./findPath.js";
 
