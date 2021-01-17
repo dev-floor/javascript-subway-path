@@ -41,14 +41,17 @@ const removeTableBodyRow = (stationTableBodyTag, stations) => {
 
 const fillStationTableBody = (stationTableBodyTag) => {
   let stations = stationStorage().getStation();
+  
   stations.forEach((station) => {
     let tbodyRow = stationTableBodyTag.insertRow(stationTableBodyTag.rows.length);
     let firstCell = tbodyRow.insertCell(0);
     let secondCell = tbodyRow.insertCell(1);
+    
     firstCell.innerHTML = station;
-    secondCell.innerHTML = '<button class=".station-delete-button">삭제</button>';
-  })
-  
+    secondCell.innerHTML = '<button class="station-delete-button" data-name=' + station + '>삭제</button>';
+  });
+
+  return stationTableBodyTag;
 };
 
 export default function stationManagerPage(contentSectionTag) {
@@ -58,6 +61,8 @@ export default function stationManagerPage(contentSectionTag) {
   const stationTableBodyTag = document.getElementsByClassName('staion-table-body')[0];
 
   fillStationTableBody(stationTableBodyTag);
+
+  console.log(document.getElementsByClassName('station-delete-button')[0].dataset.name);
 
   const addStationClickHandler = () => {
     let stationName = stationInputValue.value;
