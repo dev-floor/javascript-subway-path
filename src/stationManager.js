@@ -54,6 +54,15 @@ const fillStationTableBody = (stationTableBodyTag) => {
   return stationTableBodyTag;
 };
 
+const deleteStationHandler = (e) => {
+  let stations = stationStorage().getStation();
+  let stationName = e.target.dataset.name;
+  let idx = stations.indexOf(stationName);
+
+  stations.splice(idx,1);
+  stationStorage().setStation(stations);
+};
+
 export default function stationManagerPage(contentSectionTag) {
   contentSectionTag.innerHTML = STATION_MANAGE_TEMPLATE;
   const stationInputValue = document.getElementById('station-name-input');
@@ -62,8 +71,6 @@ export default function stationManagerPage(contentSectionTag) {
 
   fillStationTableBody(stationTableBodyTag);
 
-  console.log(document.getElementsByClassName('station-delete-button')[0].dataset.name);
-
   const addStationClickHandler = () => {
     let stationName = stationInputValue.value;
 
@@ -71,6 +78,16 @@ export default function stationManagerPage(contentSectionTag) {
   }
 
   addStationButton.addEventListener('click', addStationClickHandler);
+  
+  // if deleteStatoinBtn is clicked
+  stationTableBodyTag.addEventListener('click', function(e) {
+    let stationName = e.target.dataset.name;
+    
+    // if data-attribute exists in btn
+    if(stationName != undefined) {
+      deleteStationHandler(e);
+    }
+  });
 }
 
 
