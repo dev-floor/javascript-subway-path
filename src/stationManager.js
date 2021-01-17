@@ -54,13 +54,18 @@ const fillStationTableBody = (stationTableBodyTag) => {
   return stationTableBodyTag;
 };
 
-const deleteStationHandler = (e) => {
+const deleteStationHandler = (e, stationTableBodyTag) => {
   let stations = stationStorage().getStation();
   let stationName = e.target.dataset.name;
   let idx = stations.indexOf(stationName);
 
+  removeTableBodyRow(stationTableBodyTag, stations);
+  
   stations.splice(idx,1);
+  
   stationStorage().setStation(stations);
+  
+  fillStationTableBody(stationTableBodyTag);
 };
 
 export default function stationManagerPage(contentSectionTag) {
@@ -85,7 +90,7 @@ export default function stationManagerPage(contentSectionTag) {
     
     // if data-attribute exists in btn
     if(stationName != undefined) {
-      deleteStationHandler(e);
+      deleteStationHandler(e, stationTableBodyTag);
     }
   });
 }
