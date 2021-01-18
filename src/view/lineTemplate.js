@@ -9,6 +9,14 @@ const LINE_MANAGER_PAGE_TEMPLATE = `<section class="line-registration">
       <label for="line-end-station-selector">하행 종점</label>
       <select name="end-station" id="line-end-station-selector">
       </select>
+      <br />
+      <label for="line-end-station-selector">구간 거리</label>
+      <select name="end-station" id="line-end-station-selector">
+      </select>
+      <br />
+      <label for="line-end-station-selector">소요 시간</label>
+      <select name="end-station" id="line-end-station-selector">
+      </select>
     </div>
     <button id="line-add-button">노선 추가</button>
   </section>
