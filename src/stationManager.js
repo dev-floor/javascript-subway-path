@@ -1,4 +1,4 @@
-import stationStorage from './localStorage.js';
+import stationStorage from './storage/stationStorage.js';
 import {STATION_MANAGE_TEMPLATE} from './view/stationTemplate.js'
 
 const MIN_STATION_LENGTH_LIMIT = 2;

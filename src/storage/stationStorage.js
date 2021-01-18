@@ -14,6 +14,6 @@ export default function stationStorage() {
     getStation,
     setStation
   }
-}
+};
 
 export {stationStorage, STATIONS};

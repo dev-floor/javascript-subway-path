@@ -1,4 +1,5 @@
 import {stationManagerPage} from './stationManager.js'
+import {lineManagerPage} from './lineManager.js'
 
 export default function subwayApp(app) {
   const stationManagerButtion = document.getElementById("station-manager-button");
@@ -12,6 +13,7 @@ export default function subwayApp(app) {
   }
   
   const clickLineManagerBtn = () => {
+    lineManagerPage(contentSectionTag);
   }
 
   const clickSectionManagerBtn = () => {
