@@ -89,9 +89,7 @@ export default function stationManagerPage(contentSectionTag) {
     let stationName = e.target.dataset.name;
     
     // if data-attribute exists in btn
-    if(stationName != undefined) {
-      deleteStationHandler(e, stationTableBodyTag);
-    }
+    if(stationName != undefined) deleteStationHandler(e, stationTableBodyTag);
   });
 }
 
