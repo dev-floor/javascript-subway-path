@@ -22,14 +22,11 @@ const nameLengthCheck = (stationName) => {
 }
 
 const addStationToStorage = (stationName, stationTableBodyTag) => {
-  let stations = JSON.parse(localStorage.getItem('STATIONS'));
-  
+  let stations = stationStorage().getStation();
   removeTableBodyRow(stationTableBodyTag, stations);
 
   stations.push(stationName);
-
-  localStorage.setItem('STATIONS', JSON.stringify(stations));
-  
+  stationStorage().setStation(stations);
   fillStationTableBody(stationTableBodyTag);
 }
 
@@ -54,17 +51,14 @@ const fillStationTableBody = (stationTableBodyTag) => {
   return stationTableBodyTag;
 };
 
-const deleteStationHandler = (e, stationTableBodyTag) => {
+const deleteStationHandler = (stationName, stationTableBodyTag) => {
   let stations = stationStorage().getStation();
-  let stationName = e.target.dataset.name;
   let idx = stations.indexOf(stationName);
 
+  // 역 storage 와 view 다시 세팅
   removeTableBodyRow(stationTableBodyTag, stations);
-  
   stations.splice(idx,1);
-  
   stationStorage().setStation(stations);
-  
   fillStationTableBody(stationTableBodyTag);
 };
 
@@ -83,13 +77,12 @@ export default function stationManagerPage(contentSectionTag) {
   }
 
   addStationButton.addEventListener('click', addStationClickHandler);
-  
   // if deleteStatoinBtn is clicked
   stationTableBodyTag.addEventListener('click', function(e) {
     let stationName = e.target.dataset.name;
     
     // if data-attribute exists in btn
-    if(stationName != undefined) deleteStationHandler(e, stationTableBodyTag);
+    if(stationName != undefined) deleteStationHandler(stationName, stationTableBodyTag);
   });
 }
 
