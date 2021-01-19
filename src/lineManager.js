@@ -68,7 +68,6 @@ const findIdx = (lines, lineName) => {
 const deleteLineHandler = (lineName, lineTableBodyTag) => {
   let lines = lineStorage().getLine();
   let idx = findIdx(lines, lineName);
-  console.log(idx)
 
   // 노선 storage 와 view 다시 세팅
   removeTableBodyRow(lineTableBodyTag, lines);
