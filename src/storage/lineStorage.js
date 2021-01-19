@@ -1,3 +1,5 @@
+import Line from "../object/line.js";
+
 const LINES = 'LINES';
 
 export default function lineStorage () {

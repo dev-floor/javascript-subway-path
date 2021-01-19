@@ -2,10 +2,8 @@ export default class Line {
   constructor(name){
     this.name = name;
     this.stations = [];
-    this.distances = ['a',1,4];
+    this.distances = [];
     this.times = [];
-    this.setStartStation();
-    this.setEndStation();
   }
 
   setStartStation() {
@@ -20,12 +18,12 @@ export default class Line {
     this.stations.push(station);
   }
 
-  addDistances() {
-
+  addDistances(distance) {
+    this.distances.push(distance);
   }
 
-  addTimes() {
-
+  addTimes(times) {
+    this.times.push(times);
   }
 }
 
