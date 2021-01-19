@@ -12,9 +12,19 @@ export default function lineStorage () {
     localStorage.setItem(LINES, JSON.stringify(lines));
   };
 
+  const getLineNameArray = () => {
+    let lines = JSON.parse(localStorage.getItem(LINES));
+    let nameArr = [];
+    lines.forEach((line) => {
+      nameArr.push(line.name);
+    })
+    return nameArr;
+  }
+
   return {
     getLine,
-    setLine
+    setLine,
+    getLineNameArray
   };
 };
 
