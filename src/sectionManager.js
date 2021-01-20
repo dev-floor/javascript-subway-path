@@ -17,7 +17,7 @@ const fillStationSelector = (stationSelector) => {
   })
 }
 
-const findLineObject = (lineName) => {
+const findWhichLine = (lineName) => {
   let lines = lineStorage().getLine();
   
   for(let i=0;i<lines.length;i++) {
@@ -25,10 +25,11 @@ const findLineObject = (lineName) => {
   }
 }
 
-const fillLineTable = (sectionTableBody, lineName) => {
-  let line = findLineObject(lineName);
-  let stations = line.stations[0];
-  console.log(sectionTableBody)
+const fillSectionTableBody = (lineName) => {
+  let sectionTableBody = document.getElementsByClassName('section-table-body')[0];
+  let line = findWhichLine(lineName);
+  let stations = line.stations;
+
   for(let i=0;i<stations.length;i++) {
     let tbodyRow = sectionTableBody.insertRow(sectionTableBody.rows.length);
     let firstCell = tbodyRow.insertCell(0);
@@ -39,9 +40,51 @@ const fillLineTable = (sectionTableBody, lineName) => {
     secondCell.innerHTML = stations[i];
     thirdCell.innerHTML = '<button class="section-delete-button" data-name=' + stations[i] + '>삭제</button>';
   }
-  
+}
 
-  // 3호선이라고 했을때
+const removeTableBodyRow = (stations) => {
+  let sectionTableBody = document.getElementsByClassName('section-table-body')[0];
+  for(let i=0;i<stations.length;i++) {
+    sectionTableBody.deleteRow(0);
+  }
+}
+
+const addSectionToLine = (distance, time, station, order) => {
+  let lines = lineStorage().getLine();
+  let lineName = document.getElementById('line-title').innerText;
+
+  lines.forEach((line) => {
+    if(line.name === lineName) {
+      removeTableBodyRow(line.stations);
+
+      line.stations.splice(order,0,station);
+      line.distances.splice(order,0,distance);
+      line.times.splice(order,0,time);
+    }
+  })
+
+  lineStorage().setLine(lines);
+  fillSectionTableBody(lineName);
+}
+
+const stationDuplicateCheck = (station) => {
+  let lineName = document.getElementById('line-title').innerText;
+  let line = findWhichLine(lineName);
+  let stations = line.stations;
+  if(stations.includes(station)) {
+    alert('노선에 중복된 역이 있습니다.');
+    return false;
+  }
+  return true;
+}
+
+const addSectionClickHandler = () => {
+  let distance = parseInt(document.getElementById('section-distance').value);
+  let time = parseInt(document.getElementById('duration-time').value);
+  let stationSelector = document.getElementById('section-station-selector');
+  let station = stationSelector.options[stationSelector.selectedIndex].value;
+  let order = parseInt(document.getElementById('section-order-input').value);
+  if(stationDuplicateCheck(station)) addSectionToLine(distance, time, station, order);
 }
 
 export default function sectionManagerPage(contentSectionTag) {
@@ -50,12 +93,14 @@ export default function sectionManagerPage(contentSectionTag) {
   let lines = lineStorage().getLine();
   let sectionSelectContainer = document.getElementById('section-selector-container');
   let sectionRegisterContainer = document.getElementById('section-register-container');
+
+  // fill Line Button when '노선관리' clicked
   sectionSelectContainer.innerHTML = makeLineButtonView(lines);
 
-  let sectionLineMenuButton = document.getElementsByClassName('section-line-menu-button');
-  // fill Register Container
+  // when Line btn clicked
   sectionSelectContainer.addEventListener('click', function(e) {
     let lineName = e.target.dataset.linename;
+    // fill register form
     sectionRegisterContainer.innerHTML = SECTION_REGISTER_FORM_TEMPLATE;
 
     let lineTitle = document.getElementById('line-title');
@@ -63,16 +108,15 @@ export default function sectionManagerPage(contentSectionTag) {
     let stationSelector = document.getElementById('section-station-selector');
     let lineTableContainer = document.getElementById('section-show-container');
     
+    // fill line table body
     lineTableContainer.innerHTML = SECTION_TABLE_BODY;
-    let sectionTableBody = document.getElementsByClassName('section-table-body')[0];
 
     fillStationSelector(stationSelector);
-    fillLineTable(sectionTableBody, lineName);
+    fillSectionTableBody(lineName);
+
+    let addSectionButton = document.getElementById('section-add-button');
+    addSectionButton.addEventListener('click', addSectionClickHandler);
   })
-
-  // fill
-
-  
 }
 
 export {sectionManagerPage};
