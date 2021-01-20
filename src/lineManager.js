@@ -30,7 +30,8 @@ const addLineToStorage = (lineTableBodyTag, lineName, selectedStartStationValue,
   removeTableBodyRow(lineTableBodyTag, lines);
 
   let newLine = new Line(lineName);
-  newLine.addStations([selectedStartStationValue, selectedEndStationValue]);
+  newLine.addStations(selectedStartStationValue);
+  newLine.addStations(selectedEndStationValue)
   newLine.addDistances(sectionDistance);
   newLine.addTimes(durationTime);
 
@@ -44,8 +45,9 @@ const fillLineTableBody = (lineTableBodyTag) => {
   let lines = lineStorage().getLine();
   
   lines.forEach((line) => {
-    let startStation = line.stations[0][0];
-    let endStation = line.stations[0][line.stations[0].length-1];
+    console.log(line)
+    let startStation = line.stations[0];
+    let endStation = line.stations[line.stations.length-1];
     let tbodyRow = lineTableBodyTag.insertRow(lineTableBodyTag.rows.length);
     let firstCell = tbodyRow.insertCell(0);
     let secondCell = tbodyRow.insertCell(1);
