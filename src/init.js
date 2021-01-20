@@ -1,9 +1,14 @@
 import {stationStorage, STATIONS} from './storage/stationStorage.js';
 import {Line} from './object/line.js'
 import {lineStorage} from './storage/lineStorage.js';
+import Station from './object/station.js';
 
 const stationInitialize = () => {
-  let stations = ['교대', '강남', '역삼', '남부터미널', '양재', '양재시민의숲', '매봉'];
+  let initStationValues = ['교대', '강남', '역삼', '남부터미널', '양재', '양재시민의숲', '매봉'];
+  let stations = [];
+  initStationValues.forEach((station) => {
+    stations.push(new Station(station));
+  })
   stationStorage().setStation(stations);
 }
 

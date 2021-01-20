@@ -44,16 +44,22 @@ const fillStationTableBody = (stationTableBodyTag) => {
     let firstCell = tbodyRow.insertCell(0);
     let secondCell = tbodyRow.insertCell(1);
     
-    firstCell.innerHTML = station;
-    secondCell.innerHTML = '<button class="station-delete-button" data-name=' + station + '>삭제</button>';
+    firstCell.innerHTML = station.name;
+    secondCell.innerHTML = '<button class="station-delete-button" data-name=' + station.name + '>삭제</button>';
   });
 
   return stationTableBodyTag;
 };
 
+const findIdx = (stations, stationName) => {
+  let idx;
+  stations.forEach((station) => {if(station.name === stationName) idx = stations.indexOf(station)});
+  return idx;
+}
+
 const deleteStationHandler = (stationName, stationTableBodyTag) => {
   let stations = stationStorage().getStation();
-  let idx = stations.indexOf(stationName);
+  let idx = findIdx(stations, stationName);
 
   // 역 storage 와 view 다시 세팅
   removeTableBodyRow(stationTableBodyTag, stations);
