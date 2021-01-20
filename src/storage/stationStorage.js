@@ -10,9 +10,19 @@ export default function stationStorage() {
     localStorage.setItem(STATIONS, JSON.stringify(stations));
   }
 
+  const getStationNameArray = () => {
+    let stations = JSON.parse(localStorage.getItem(STATIONS));
+    let stationNameArray = [];
+    stations.forEach((station) => {
+      stationNameArray.push(station.name);
+    })
+    return stationNameArray;
+  }
+
   return {
     getStation,
-    setStation
+    setStation,
+    getStationNameArray
   }
 };
 
