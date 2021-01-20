@@ -1,12 +1,13 @@
+import Station from './object/station.js';
 import stationStorage from './storage/stationStorage.js';
 import {STATION_MANAGE_TEMPLATE} from './view/stationTemplate.js'
 
 const MIN_STATION_LENGTH_LIMIT = 2;
 
 const nameDupilcateCheck = (stationName) => {
-  let stations = JSON.parse(localStorage.getItem('STATIONS'));
-
-  if(stations.includes(stationName)) {
+  let stationNameArray = stationStorage().getStationNameArray();
+  
+  if(stationNameArray.includes(stationName)) {
     alert('중복된 이름이 있습니다.');
     return false;
   }
@@ -22,10 +23,11 @@ const nameLengthCheck = (stationName) => {
 }
 
 const addStationToStorage = (stationName, stationTableBodyTag) => {
+  let newStation = new Station(stationName);
   let stations = stationStorage().getStation();
   removeTableBodyRow(stationTableBodyTag, stations);
 
-  stations.push(stationName);
+  stations.push(newStation);
   stationStorage().setStation(stations);
   fillStationTableBody(stationTableBodyTag);
 }
@@ -38,7 +40,7 @@ const removeTableBodyRow = (stationTableBodyTag, stations) => {
 
 const fillStationTableBody = (stationTableBodyTag) => {
   let stations = stationStorage().getStation();
-  
+
   stations.forEach((station) => {
     let tbodyRow = stationTableBodyTag.insertRow(stationTableBodyTag.rows.length);
     let firstCell = tbodyRow.insertCell(0);

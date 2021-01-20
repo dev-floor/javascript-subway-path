@@ -4,7 +4,7 @@ import lineStorage from './storage/lineStorage.js';
 import Line from './object/line.js';
 
 const fillSelectBoxTag = (selectBoxTag) => {
-  let stations = stationStorage().getStation();
+  let stations = stationStorage().getStationNameArray();
   stations.forEach((station) => {
     selectBoxTag.innerHTML += `<option>${station}</option>`;
   })
