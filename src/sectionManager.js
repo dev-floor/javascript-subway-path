@@ -2,6 +2,8 @@ import lineStorage from './storage/lineStorage.js';
 import stationStorage from './storage/stationStorage.js';
 import {SECTION_MANAGER_PAGE_TEMPLATE, SECTION_REGISTER_FORM_TEMPLATE, SECTION_TABLE_BODY} from './view/sectionTemplate.js'
 
+const START_STATION_IDX = 0;
+
 const makeLineButtonView = (lines) => {
   let lineButtonTemplate = '';
   lines.forEach((line) => {
@@ -53,16 +55,31 @@ const addSectionToLine = (distance, time, station, order) => {
   let lines = lineStorage().getLine();
   let lineName = document.getElementById('line-title').innerText;
 
-  lines.forEach((line) => {
-    if(line.name === lineName) {
-      removeTableBodyRow(line.stations);
+  for(let i=0;i<lines.length;i++) {
+    if(lines[i].name === lineName) {
+      let endStationIdx = lines[i].stations.length;
+      removeTableBodyRow(lines[i].stations);
 
-      line.stations.splice(order,0,station);
-      line.distances.splice(order,0,distance);
-      line.times.splice(order,0,time);
+      // 종점이 아니라면 끊어진 라인과 연결 시켜주고 지정된 시간, 거리 값 넣어주기
+      if(order !== START_STATION_IDX && order !== endStationIdx) {
+        
+        lines[i].distances[order-1] = 2;
+        lines[i].times[order-1] = 3;
+
+        lines[i].stations.splice(order,0,station);
+        lines[i].distances.splice(order-1,0,distance);
+        lines[i].times.splice(order-1,0,time);
+        break;
+      }
+
+      lines[i].stations.splice(order,0,station);
+      lines[i].distances.splice(order,0,distance);
+      lines[i].times.splice(order,0,time);
+      break;
     }
-  })
+  }
 
+  console.log(lines[2]);
   lineStorage().setLine(lines);
   fillSectionTableBody(lineName);
 }
