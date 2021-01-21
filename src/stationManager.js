@@ -3,6 +3,7 @@ import stationStorage from './storage/stationStorage.js';
 import {STATION_MANAGE_TEMPLATE} from './view/stationTemplate.js'
 
 const MIN_STATION_LENGTH_LIMIT = 2;
+const EMPTY = 0;
 
 const nameDupilcateCheck = (stationName) => {
   let stationNameArray = stationStorage().getStationNameArray();
@@ -68,7 +69,23 @@ const deleteStationHandler = (stationName, stationTableBodyTag) => {
   stations.splice(idx,1);
   stationStorage().setStation(stations);
   fillStationTableBody(stationTableBodyTag);
-};
+}
+
+const findWhichStation = (stationName) => {
+  let stations = stationStorage().getStation();
+  for(let i=0;i<stations.length;i++) {
+    if(stations[i].name === stationName) return stations[i];
+  }
+}
+
+const stationHaveLine = (stationName) => {
+  let station = findWhichStation(stationName);
+  if(station.lines.length !== EMPTY) {
+    alert('이 역은 노선에 포함되어 있습니다.');
+    return true;
+  };
+  return false;
+}
 
 export default function stationManagerPage(contentSectionTag) {
   contentSectionTag.innerHTML = STATION_MANAGE_TEMPLATE;
@@ -90,9 +107,9 @@ export default function stationManagerPage(contentSectionTag) {
     let stationName = e.target.dataset.name;
     
     // if data-attribute exists in btn
-    if(stationName != undefined) deleteStationHandler(stationName, stationTableBodyTag);
+    if(stationName != undefined && !stationHaveLine(stationName)) deleteStationHandler(stationName, stationTableBodyTag);
   });
 }
 
 
-export {stationManagerPage};
+export {stationManagerPage, findIdx};

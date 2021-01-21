@@ -1,5 +1,6 @@
 import lineStorage from './storage/lineStorage.js';
-import stationStorage from './storage/stationStorage.js';
+import {stationStorage} from './storage/stationStorage.js';
+import {findIdx} from './stationManager.js'
 import {SECTION_MANAGER_PAGE_TEMPLATE, SECTION_REGISTER_FORM_TEMPLATE, SECTION_TABLE_BODY} from './view/sectionTemplate.js'
 
 const START_STATION_IDX = 0;
@@ -79,7 +80,6 @@ const addSectionToLine = (distance, time, station, order) => {
     }
   }
 
-  console.log(lines[2]);
   lineStorage().setLine(lines);
   fillSectionTableBody(lineName);
 }
@@ -95,13 +95,27 @@ const stationDuplicateCheck = (station) => {
   return true;
 }
 
+const addLineToStation = (stationName) => {
+  // 역에 노선 정보 넣어주기.
+  let lineName = document.getElementById('line-title').innerText;
+  let stations = stationStorage().getStation();
+  let idx = findIdx(stations, stationName);
+
+  stations[idx].lines.push(lineName);
+  stationStorage().setStation(stations)
+}
+
 const addSectionClickHandler = () => {
   let distance = parseInt(document.getElementById('section-distance').value);
   let time = parseInt(document.getElementById('duration-time').value);
   let stationSelector = document.getElementById('section-station-selector');
   let station = stationSelector.options[stationSelector.selectedIndex].value;
   let order = parseInt(document.getElementById('section-order-input').value);
-  if(stationDuplicateCheck(station)) addSectionToLine(distance, time, station, order);
+  
+  if(stationDuplicateCheck(station)) {
+    addSectionToLine(distance, time, station, order);
+    addLineToStation(station);
+  }
 }
 
 export default function sectionManagerPage(contentSectionTag) {
