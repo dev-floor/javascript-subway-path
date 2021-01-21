@@ -61,7 +61,7 @@ const fillLineTableBody = (lineTableBodyTag) => {
   })
 }
 
-const findIdx = (lines, lineName) => {
+const findIdxInStations = (lines, lineName) => {
   let idx;
   lines.forEach((line) => {if(line.name === lineName) idx = lines.indexOf(line)})
   return idx;
@@ -69,7 +69,7 @@ const findIdx = (lines, lineName) => {
 
 const deleteLineHandler = (lineName, lineTableBodyTag) => {
   let lines = lineStorage().getLine();
-  let idx = findIdx(lines, lineName);
+  let idx = findIdxInStations(lines, lineName);
 
   // 노선 storage 와 view 다시 세팅
   removeTableBodyRow(lineTableBodyTag, lines);

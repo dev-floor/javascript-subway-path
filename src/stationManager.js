@@ -54,15 +54,15 @@ const fillStationTableBody = (stationTableBodyTag) => {
   return stationTableBodyTag;
 };
 
-const findIdx = (stations, stationName) => {
-  let idx;
-  stations.forEach((station) => {if(station.name === stationName) idx = stations.indexOf(station)});
-  return idx;
+const findIdxInStations = (stations, stationName) => {
+  for(let i=0;i<stations.length;i++) {
+    if(stations[i].name === stationName) return i;
+  }
 }
 
 const deleteStationHandler = (stationName, stationTableBodyTag) => {
   let stations = stationStorage().getStation();
-  let idx = findIdx(stations, stationName);
+  let idx = findIdxInStations(stations, stationName);
 
   // 역 storage 와 view 다시 세팅
   removeTableBodyRow(stationTableBodyTag, stations);
@@ -112,4 +112,4 @@ export default function stationManagerPage(contentSectionTag) {
 }
 
 
-export {stationManagerPage, findIdx};
+export {stationManagerPage, findIdxInStations};
