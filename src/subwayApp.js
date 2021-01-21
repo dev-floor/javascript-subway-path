@@ -1,6 +1,7 @@
 import {stationManagerPage} from './stationManager.js'
 import {lineManagerPage} from './lineManager.js'
 import {sectionManagerPage} from './sectionManager.js';
+import {printSubWayMap} from './printSubWayMap.js'
 
 export default function subwayApp(app) {
   const stationManagerButtion = document.getElementById("station-manager-button");
@@ -22,6 +23,7 @@ export default function subwayApp(app) {
   }
 
   const clickMapPrintManagerBtn = () => {
+    printSubWayMap(contentSectionTag);
   }
 
   stationManagerButtion.addEventListener('click', clickStationManagerBtn);
