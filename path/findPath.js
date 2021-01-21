@@ -29,6 +29,7 @@ const findPathValidation = (departure, arrival) => {
         alert(message.FIND_PATH_DEPARTURE_ARRIVAL_SAME);
         return false;
     }
+    return true;
 }
 
 const findPath = (departureStation, arrivalStation) => {
