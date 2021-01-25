@@ -1,0 +1,86 @@
+body {
+  margin-left: 20px;
+}
+
+button {
+  font-weight: 600;
+}
+
+table {
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+  animation: fadeIn 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.chosen {
+  background-color: slategray;
+}
+
+#line-name-input {
+  margin-bottom: 20px;
+}
+
+#section-status-table {
+  margin-top: 30px;
+}
+
+.map h3 {
+  margin: 15px;
+  color: blue;
+}
+
+.map > ul {
+  margin: 5px;
+}
+
+.map > li {
+  margin-left: 10px;
+  font-weight: 900;
+}
+
+.list-hollow-circle {
+  list-style-type: circle;
+  color: brown;
+  margin: 0px;
+}
+
+#departure-station-name-input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#arrival-station-name-input {
+  margin-bottom: 30px;
+}
+
+#search-button {
+  margin-top: 30px;
+}
+
+#search-button {
+  margin-left: 10px;
+}
+
+#find-path-manager {
+  margin-top: 25px;
+}
+
+.map {
+  margin-top: 25px;
+}

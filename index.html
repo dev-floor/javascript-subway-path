@@ -3,10 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <title>지하철 노선도 관리 & 경로 검색</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div id="app">
       <h1>🚇 지하철 노선도 관리 & 경로 검색</h1>
+      <div class="buttons">
+        <button id = "station-manager-button">1. 역 관리</button>
+        <button id = "line-manager-button">2. 노선 관리</button>
+        <button id = "section-manager-button">3. 구간 관리</button>
+        <button id = "map-print-manager-button">4. 지하철 노선도 출력</button>
+        <button id="find-path-manager-button">5. 경로 조회</button>
+      </div>
+
+
+      <div id = "station-manager" class = "show">
+        <h4>역 이름</h4>
+        <input id = "station-name-input" type="text" placeholder="역 이름을 입력하세요" required>
+        <button id = "station-add-button">역 추가</button>
+        
+        <h2>🚉 지하철 역 목록</h2>
+        <div>
+          <table id="station-name-table" border="1">
+            <tr>
+              <th>역 이름</th>
+              <th>설정</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <div id="line-manager" class = "show">
+        <h4>노선 이름</h4>
+
+        <input id = "line-name-input" type="text" placeholder="노선 이름을 입력하세요" required>
+        
+        <div>
+          상행종점 <select id="line-start-station-selector">
+          </select>
+        </div>
+
+        <div>
+          하행종점 <select id="line-end-station-selector">     
+          </select>
+        </div>
+
+        <div style = "margin: 10px 0px">
+          구간거리 <input type="number" id = "line-distance" placeholder="구간 거리(km)를 입력하세요">
+          소요시간 <input type="number" id="line-time" placeholder="소요시간(분)을 입력하세요">
+        </div>
+
+        <button id = "line-add-button" style="margin: 10px">노선 추가</button>
+
+        <h2>🚉 지하철 노선 목록</h2>
+        <div>
+          <table id="line-status-table" border="1">
+            <tr>
+              <th>노선 이름</th>
+              <th>상행 종점역</th>
+              <th>하행 종점역</th>
+              <th>설정</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <div id="section-manager" class = "show">
+        <h3>구간을 수정할 노선을 선택해주세요.</h3>
+        <div class="section-line-menu-button-control">
+
+        </div>
+
+        <div class = "section-select-screen hidden">
+          <h3 id="selected-line"></h3>
+
+          <h4>구간등록</h4>
+
+          <div>상행역 
+            <select id="section-start-station-selector">
+            </select>         
+          </div>
+
+          <div>하행역 
+            <select id="section-end-station-selector">
+            </select>         
+          </div>
+
+          <div style = "margin: 10px 0px">구간거리 <input type="number" id = "new-section-distance" placeholder="구간 거리(km)를 입력하세요"> 소요시간 <input type="number" id="new-section-time" placeholder="소요시간(분)을 입력하세요"> <button id="section-add-button">등록</button>
+          </div>
+
+          <div>
+            <table id="section-status-table" border="1">
+              <tr>
+                <th>순서</th>
+                <th>이름</th>
+                <th>설정</th>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="map-print-manager" class = "show">
+        <div class="map">
+
+
+        </div>
+      </div>
+
+
+      <div id="find-path-manager" class = "show">  
+        <h2>🚇 지하철 길찾기</h2>
+
+        <div style = "font-weight: 600;">
+          출발역 <input type="text" id="departure-station-name-input" placeholder="출발역을 입력하세요">
+        </div>
+        <div style = "font-weight: 600;">
+          도착역 <input type="text" id="arrival-station-name-input" placeholder="도착역을 입력하세요">
+        </div>
+
+        <span>
+          <input type="radio" id = "shortest-path" name ="search-type" checked>
+          <label for="shortest-path">최단 거리</label>
+        </span>
+        
+        <span>
+          <input type="radio" id = "shortest-time" name = "search-type">
+          <label for="shortest-time">최소 시간</label>
+        </span>
+
+        <div>
+          <button id="search-button">길 찾기</button>
+        </div>
+        
+        <div id = "find-path-result"  class = "hidden">
+          <h2>✔ 결과</h2>
+          <h4 id="find-path-result-title"></h4>
+          <div>
+            <table id="find-path-result-table" border="1">
+              <tr>
+                <th>총 거리</th>
+                <th>총 소요시간</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
     </div>
     <script type="module" src="src/index.js"></script>
   </body>
