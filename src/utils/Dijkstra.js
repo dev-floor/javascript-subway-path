@@ -176,7 +176,7 @@ export default function Dijkstra() {
           break;
         }
         const neighbors = hashOfVertex[current];
-
+        // console.log(current,neighbors)
         for (const vertexName in neighbors) {
           if (visited.hasOwnProperty(vertexName)) {
             continue;
@@ -187,6 +187,7 @@ export default function Dijkstra() {
             pq.enqueue(vertexName, distFromStart);
             distance[vertexName] = distFromStart;
             previous[vertexName] = current;
+            // console.log(distFromStart)
           }
         }
         visited[current] = true;
